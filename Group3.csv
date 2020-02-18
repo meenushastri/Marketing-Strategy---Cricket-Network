@@ -1,0 +1,31 @@
+Disconnect Reason,Code,,,Occupation,Code
+N/A,1,,,Management,1
+BILL CYCLE CHANGE,2,,,Technical,2
+BILLING/PAYMENT PROBLEM,3,,,Professional,3
+BM,4,,,Sales,4
+BROKEN PHONE/HANDSET,5,,,Office Admin,5
+CHILD PUNISHMENT,6,,,Blue Collar,6
+CUSTOMER SVC ISSUE,7,,,Farmer,7
+DUPLICATE ACTIVATION,8,,,Other,8
+ED,9,,,Retired,9
+FEES,10,,,,
+FINANCIAL HARDSHIP,11,,,,
+FRAUD,12,,,,
+IL,13,,,,
+JI,14,,,,
+JL,15,,,,
+LOST OR STOLEN PHONE,16,,,,
+ML,17,,,,
+MOVING OUT OF AREA,18,,,,
+NETWRK SVC COMPLAINT,19,,,,
+NON-PAYMENT,20,,,,
+OTHER COMPETITOR,21,,,,
+PHN NO LONGER NEEDED,22,,,,
+PORT OUT (# ported to other carrier),23,,,,
+SD,24,,,,
+SERIOUS INCIDENT (customer disconnect),25,,,,
+SUBSCRIPTION FRAUD,26,,,,
+TESTING,27,,,,
+TRANSFER,28,,,,
+(blank),,,,,
+Grand Total,,,,,

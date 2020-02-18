@@ -1,0 +1,33 @@
+LIBNAME UTD 'H:\SAS-MXS180051\Group 5 Project\Cluster_Reattempt'; run;
+
+proc import datafile = 'H:\SAS-MXS180051\Group 5 Project\Cluster_Reattempt\crkt4.csv'
+ out = utd.crkt4
+ dbms = CSV
+ ;
+run;
+proc fastclus data = utd.crkt4
+maxclusters = 6 out = utd.clus14mar ;
+var
+STD_DATA_USED_1MONTH		STD_DATA_1MONTH_TO_DEACT		STD_NUM_IVR_CALLS
+STD_AVG_IVR_DURATION	STD_NUM_DROPPED_CALLS			STD_tenure
+STD_ETHNICITY			STD_SUB_LPAY_AMT				STD_hh_income
+STD_management_occ		STD_technical_occ			STD_professinal_occ
+STD_sales_occ			STD_officeadmin_occ			STD_bluecollar_occ
+STD_retired_occ ;
+run;
+proc sort data = utd.clus14mar; by cluster; run;
+
+
+proc means data = utd.clus14mar; by cluster; 
+output out = utd.means; run;
+data utd.means2;
+set utd.means;
+where _stat_ = 'MEAN';
+run;
+
+proc export data=utd.clus14mar dbms=CSV
+
+outfile="H:\SAS-MXS180051\clus14mar.csv"
+
+replace;
+run;

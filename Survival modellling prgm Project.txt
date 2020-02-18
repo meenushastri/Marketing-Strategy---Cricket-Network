@@ -1,0 +1,65 @@
+
+libname sa 'H:\SAS-MXS180051\Group 5 Project\Cluster_Reattempt\Survival modelling'; run;
+
+
+
+
+data sa_data;
+set sa.clus8april;
+censored = 0;
+if churned > 0 then censored = 1;
+run;
+
+
+*NUM_IVR_CALLS AVG_IVR_DURATION NUM_DROPPED_CALLS SUB_LPAY_AMT hh_income total_data total_messages total_minutes;
+
+*Gamma distribution has the least AIC among all;
+
+proc lifereg data = sa_data;
+model tenure*censored(0) =
+DATA_USED_1MONTH DATA_1MONTH_TO_DEACT	NUM_IVR_CALLS	AVG_IVR_DURATION	NUM_DROPPED_CALLS	SUB_LPAY_AMT	hh_income	PLAN_REVENUE_AMT	GROSS_ADDS_COUNT	CPE_COUNT	WINBACK_ADD_COUNT	TTL_FEAT_COUNT	RETURNS_COUNT	TRANSFER_COUNT	CALL_1MONTH_TO_DEACT	CALLS_1MONTH	AVG_CALL_DURATION	DROP_CALLS_1MONTH_TO_DEACT	DROP_CALLS_2MONTHS_TO_DEACT	DROP_CALLS_3MONTHS_TO_DEACT	DROP_CALLS_1MONTH	DROP_CALLS_2MONTH	DROP_CALLS_3MONTH	MESSAGES_SENT_1MONTH	SMS_1MONTH_TO_DEACT	TOTAL_CALLS_MADE_1MONTH	CALLS_1MONTH_TO_DEACT	DISTINCT_FEATURE_COUNT	NUM_PAYMENTS	CHECK_PAYMENTS	CASH_PAYMENTS	CC_PAYMENTS	COUPON_ADJUSTMENTS	prev_rev_amt	bundle	never_before_cricket	fbnp	autobillpay	ebilling	hotline	total_data	total_messages	total_minutes	total_drop_calls	Num_Adults_in_LU	Religious_Magazine
+ /dist = gamma;
+output out = output p=median std = s; 
+where Cluster = 5;
+*ods output ParameterEstimates=ProjectEstimates8Apr;
+run;
+
+/*proc lifereg data = sa_data;
+model tenure*censored(0) =
+DATA_USED_1MONTH DATA_1MONTH_TO_DEACT	NUM_IVR_CALLS	AVG_IVR_DURATION	NUM_DROPPED_CALLS	SUB_LPAY_AMT	hh_income	PLAN_REVENUE_AMT	GROSS_ADDS_COUNT	CPE_COUNT	WINBACK_ADD_COUNT	TTL_FEAT_COUNT	RETURNS_COUNT	TRANSFER_COUNT	CALL_1MONTH_TO_DEACT	CALLS_1MONTH	AVG_CALL_DURATION	DROP_CALLS_1MONTH_TO_DEACT	DROP_CALLS_2MONTHS_TO_DEACT	DROP_CALLS_3MONTHS_TO_DEACT	DROP_CALLS_1MONTH	DROP_CALLS_2MONTH	DROP_CALLS_3MONTH	MESSAGES_SENT_1MONTH	SMS_1MONTH_TO_DEACT	TOTAL_CALLS_MADE_1MONTH	CALLS_1MONTH_TO_DEACT	DISTINCT_FEATURE_COUNT	NUM_PAYMENTS	CHECK_PAYMENTS	CASH_PAYMENTS	CC_PAYMENTS	COUPON_ADJUSTMENTS	prev_rev_amt	bundle	never_before_cricket	fbnp	autobillpay	ebilling	hotline	total_data	total_messages	total_minutes	total_drop_calls	Num_Adults_in_LU	Religious_Magazine
+ /dist = exponential;
+output out = output p=median std = s; 
+where Cluster = 5;
+*ods output ParameterEstimates=ProjectEstimates8Apr;
+run;
+proc lifereg data = sa_data;
+model tenure*censored(0) =
+DATA_USED_1MONTH DATA_1MONTH_TO_DEACT	NUM_IVR_CALLS	AVG_IVR_DURATION	NUM_DROPPED_CALLS	SUB_LPAY_AMT	hh_income	PLAN_REVENUE_AMT	GROSS_ADDS_COUNT	CPE_COUNT	WINBACK_ADD_COUNT	TTL_FEAT_COUNT	RETURNS_COUNT	TRANSFER_COUNT	CALL_1MONTH_TO_DEACT	CALLS_1MONTH	AVG_CALL_DURATION	DROP_CALLS_1MONTH_TO_DEACT	DROP_CALLS_2MONTHS_TO_DEACT	DROP_CALLS_3MONTHS_TO_DEACT	DROP_CALLS_1MONTH	DROP_CALLS_2MONTH	DROP_CALLS_3MONTH	MESSAGES_SENT_1MONTH	SMS_1MONTH_TO_DEACT	TOTAL_CALLS_MADE_1MONTH	CALLS_1MONTH_TO_DEACT	DISTINCT_FEATURE_COUNT	NUM_PAYMENTS	CHECK_PAYMENTS	CASH_PAYMENTS	CC_PAYMENTS	COUPON_ADJUSTMENTS	prev_rev_amt	bundle	never_before_cricket	fbnp	autobillpay	ebilling	hotline	total_data	total_messages	total_minutes	total_drop_calls	Num_Adults_in_LU	Religious_Magazine
+ /dist = weibull;
+output out = output p=median std = s; 
+where Cluster = 5;
+*ods output ParameterEstimates=ProjectEstimates8Apr;
+run;
+proc lifereg data = sa_data;
+model tenure*censored(0) =
+DATA_USED_1MONTH DATA_1MONTH_TO_DEACT	NUM_IVR_CALLS	AVG_IVR_DURATION	NUM_DROPPED_CALLS	SUB_LPAY_AMT	hh_income	PLAN_REVENUE_AMT	GROSS_ADDS_COUNT	CPE_COUNT	WINBACK_ADD_COUNT	TTL_FEAT_COUNT	RETURNS_COUNT	TRANSFER_COUNT	CALL_1MONTH_TO_DEACT	CALLS_1MONTH	AVG_CALL_DURATION	DROP_CALLS_1MONTH_TO_DEACT	DROP_CALLS_2MONTHS_TO_DEACT	DROP_CALLS_3MONTHS_TO_DEACT	DROP_CALLS_1MONTH	DROP_CALLS_2MONTH	DROP_CALLS_3MONTH	MESSAGES_SENT_1MONTH	SMS_1MONTH_TO_DEACT	TOTAL_CALLS_MADE_1MONTH	CALLS_1MONTH_TO_DEACT	DISTINCT_FEATURE_COUNT	NUM_PAYMENTS	CHECK_PAYMENTS	CASH_PAYMENTS	CC_PAYMENTS	COUPON_ADJUSTMENTS	prev_rev_amt	bundle	never_before_cricket	fbnp	autobillpay	ebilling	hotline	total_data	total_messages	total_minutes	total_drop_calls	Num_Adults_in_LU	Religious_Magazine
+ /dist = lnormal;
+output out = output p=median std = s; 
+where Cluster = 5;
+*ods output ParameterEstimates=ProjectEstimates8Apr;
+run;
+proc lifereg data = sa_data;
+model tenure*censored(0) =
+DATA_USED_1MONTH DATA_1MONTH_TO_DEACT	NUM_IVR_CALLS	AVG_IVR_DURATION	NUM_DROPPED_CALLS	SUB_LPAY_AMT	hh_income	PLAN_REVENUE_AMT	GROSS_ADDS_COUNT	CPE_COUNT	WINBACK_ADD_COUNT	TTL_FEAT_COUNT	RETURNS_COUNT	TRANSFER_COUNT	CALL_1MONTH_TO_DEACT	CALLS_1MONTH	AVG_CALL_DURATION	DROP_CALLS_1MONTH_TO_DEACT	DROP_CALLS_2MONTHS_TO_DEACT	DROP_CALLS_3MONTHS_TO_DEACT	DROP_CALLS_1MONTH	DROP_CALLS_2MONTH	DROP_CALLS_3MONTH	MESSAGES_SENT_1MONTH	SMS_1MONTH_TO_DEACT	TOTAL_CALLS_MADE_1MONTH	CALLS_1MONTH_TO_DEACT	DISTINCT_FEATURE_COUNT	NUM_PAYMENTS	CHECK_PAYMENTS	CASH_PAYMENTS	CC_PAYMENTS	COUPON_ADJUSTMENTS	prev_rev_amt	bundle	never_before_cricket	fbnp	autobillpay	ebilling	hotline	total_data	total_messages	total_minutes	total_drop_calls	Num_Adults_in_LU	Religious_Magazine
+ /dist = llogistic;
+output out = output p=median std = s; 
+where Cluster = 5;
+*ods output ParameterEstimates=ProjectEstimates8Apr;
+run;
+
+
+* distribution choices;
+* gamma llogistic lnormal weibull exponential ;
+
+proc means data = output; run;
+
